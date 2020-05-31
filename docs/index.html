@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reloj</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="stylesheet" href="css/styles.css?v2.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta name="theme-color" content="#000000"/>
+</head>
+<body>
+    <section class="cont__loader">
+        <section class="loader">
+            <span class="loader__span"></span>
+            <span class="loader__span"></span>
+            <section class="btn jizra__logo">
+                <img loading="auto" src="https://jizratest.eu5.org/img/diseno-jizra-logo.png" alt="Jizra Logo" class="jizra__logo__img">
+            </section>
+        </section>
+        <section class="loader__texto">
+            <span class="loader__texto__span">L</span>
+            <span class="loader__texto__span">O</span>
+            <span class="loader__texto__span">A</span>
+            <span class="loader__texto__span">D</span>
+            <span class="loader__texto__span">I</span>
+            <span class="loader__texto__span">N</span>
+            <span class="loader__texto__span">G</span>
+            <span class="loader__texto__span">.</span>
+            <span class="loader__texto__span">.</span>
+            <span class="loader__texto__span">.</span>
+        </section>
+        <script>
+            let letra = document.querySelectorAll('.loader__texto__span');
+            for(let i = 0; i < letra.length; i++){
+                letra[i].style = `animation: texto 2s ease-in-out ${0.1 * i}s infinite;`
+            };
+            let loader = document.querySelector('.cont__loader');
+            window.addEventListener('load', removeLoader);
+            function removeLoader(){
+                setTimeout(()=>{
+                    loader.remove();
+                },1500)
+                
+             }
+                
+             
+
+        </script>
+    </section>
+   <section id="reloj_en_vivo" class="cara_externa">
+        <div class="cara_interna">
+            <div class="manecilla hora"></div>
+            <div class="manecilla minuto"></div>
+            <div class="manecilla segundo"></div>
+        </div>
+    </section>
+
+<script src="js/main.js?v2"></script>
+
+</body>
+</html>

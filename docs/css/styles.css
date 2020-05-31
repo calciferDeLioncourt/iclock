@@ -1,0 +1,355 @@
+:root{
+    --size: 12.5em;
+    --logoPorciento:7%;
+    --loaderPorciento:10%;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+    flex-wrap: wrap;
+    background: #000;
+}
+.cara_externa {
+    position: relative;
+    width: 90%;
+    max-width: 300px; /* ancho del reloj */
+    height: 300px;
+    max-height: 300px; /* alto reloj */
+    background-image:url(../img/face-reloj.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    box-shadow: inset 0 0 10px black,
+                0 0 10px 5px rgba(255,255,255,.2);
+    border: 0px solid silver; /* thickness of outer border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: contorno 5s linear .3s infinite;
+    }
+    @keyframes contorno{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(-360deg);
+        }
+    }
+.cara_externa::before{
+    content: "";
+    position: absolute;
+    width: 87%;
+    height: 87%;
+    background-image: url(../img/fondo-reloj.png);
+    background-size: contain;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    border-radius: 50%;
+}
+
+
+.cara_interna {
+    position: relative;
+    width: 88%;
+    height: 88%;
+    background-image:url(../img/face-reloj.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:calc(100% + 13%);
+    border-radius: 50%;
+    z-index: 10;
+    opacity: .9;
+
+    animation: reloj 5s ease-in-out .3s infinite;
+}
+@keyframes reloj {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.cara_interna::before {
+    /* clock center circle small */
+    content: "";
+    width: 18px; /* width of inner circle */
+    height: 18px; /* height of inner circle */
+    border-radius: 18px;
+    background-image: url(../img/centro.png);
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0 0 30px blue;
+    z-index: 1000;
+    }
+
+.cara_interna::after {
+    content: "10 / 11 / 2019";
+    position: absolute;
+    width: 100%;
+    font: normal 0.5em Arial;
+    color: white;
+    text-align: center;
+    top: 23%;
+    }
+
+.manecilla, .manecilla.hora {
+    position: absolute;
+    width: 100%;
+    height: 30%; /* height of hour hand */
+    bottom: 50%;
+    transform: rotate(0deg);
+    
+   
+    transform-origin: bottom;
+    z-index: 2;
+    background-image: url(../img/hora.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;  
+}
+
+ .manecilla.minuto {
+    height: 40%;
+    background-image: url(../img/minuto.png);
+}
+
+.manecilla.segundo {
+    height: 50%;
+    background-image: url(../img/seg.png);
+}
+
+body>div{
+    display: none;
+}
+
+.contenedor__boton{
+    display: none;
+    justify-content: space-around;
+    width: 100%;
+    margin: 5px auto;
+}
+.contenedor__boton .boton{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 50, 140, 1);
+    width: 120px;
+    height: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: .2s;
+}
+.contenedor__boton .boton::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background: rgba(255,255,255,.0);
+    transition: .2s;
+}
+.contenedor__boton .boton:hover.boton::before{
+    background: rgba(255,255,255,.3);
+}
+.contenedor__boton .boton .texto__boton{
+    color: white;
+    position: relative;
+    font-size: 1em;
+}
+/*----------------------------------loding--------------------------------------------*/
+
+.cont__loader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 27px; /* 16px para width de 200 || 27 px para widht de 337.5 cell || 32px para width de 400 */
+    z-index: 10000;
+}
+.jizra__logo{
+    position: absolute;
+    left: var(--logoPorciento);
+    top: var(--logoPorciento);
+    right: var(--logoPorciento);
+    bottom: var(--logoPorciento);
+    z-index: 20;
+    animation: jizra 1s linear infinite;
+    /* display: none; */
+}
+
+@keyframes fondo-logo{
+    50%{
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+.jizra__logo::after{
+    background:rgba(255, 255, 255, .0);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.jizra__logo__img{
+    width: 100%;
+    position: relative;
+}
+@keyframes jizra{
+    0%,100%{
+        filter: hue-rotate(0deg);
+    }
+    50%{
+        filter: hue-rotate(360deg);
+    }
+}
+span.ondas{
+    position: absolute;
+    background: rgba(255, 255, 255, 1);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: ondas 1s linear infinite;
+    z-index: 10;
+}
+@keyframes ondas{
+    0%{
+        width: 0px;
+        height: 0px;
+        opacity: .5;
+    }
+    100%{
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: var(--size);
+    max-width: 500px;
+    height: var(--size);
+    max-height: 500px;
+    border: 4px solid #000;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: -0.3125em -0.3125em 0.3125em rgba(255, 255, 255, 0.1),
+                0.625em 0.625em 0.625em rgba(0, 0, 0, 0.4),
+                inset -0.3125em -0.3125em 0.3125em rgba(255, 255, 255, 0.2),
+                inset 0.625em 0.625em 0.625em rgba(0, 0, 0, 0.4);
+}
+.loader::before{
+    content: "";
+    position: absolute;
+    left: var(--loaderPorciento);
+    top: var(--loaderPorciento);
+    right: var(--loaderPorciento);
+    bottom: var(--loaderPorciento);
+    z-index: 10;
+    background: #000;
+    border-radius: 50%;
+    border: 2px solid #000;
+    box-shadow: -0.125px -0.125px 0.3125em rgba(255, 255, 255, 0.2),
+                0.1875em 0.1875em 0.3125em rgba(0, 0, 0, 0.5);
+}
+.loader::after{
+    content: "";
+    position: absolute;
+    left: var(--loaderPorciento);
+    top: var(--loaderPorciento);
+    right: var(--loaderPorciento);
+    bottom: var(--loaderPorciento);
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(231,10,231,.7) 0%, rgba(51,232,23,.6) 100%);
+    /* background: linear-gradient(135deg, #14ffe9 0%, #ffeb3b 50%, #ff00e0 100%); */
+    border-radius: 50%;
+    border: 2px solid #000;
+    animation: jizra 1s linear infinite;
+    box-shadow: -0.125px -0.125px 0.3125em rgba(255, 255, 255, 0.2),
+                0.1875em 0.1875em 0.3125em rgba(0, 0, 0, 0.5);
+}
+.loader__span{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(#14ffe9,#ffeb3b,#ff00e0);
+    filter: blur(20px);
+    z-index: -1;
+    animation: loader 0.5s linear infinite;
+}
+@keyframes loader{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.loader__texto{
+    color: rgba(255, 255, 255, 1);
+    position: relative;
+    width: 100%;
+    text-align: center;
+    -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0,0,0,0.2));
+}
+.loader__texto__span{
+    position: relative;
+    font-size: 32px;
+    display: inline-block;
+    text-transform: uppercase;
+    /* animation: texto 2s ease-in-out infinite; */
+}
+@keyframes texto {
+    0%, 40%, 100% {
+        transform: translateY(0);
+    }
+    20%{
+        transform: translateY(-50px);
+    }
+}
+@media screen and (min-width: 600px){
+    body{
+        font-size: 32px;
+    }
+}
+@media screen and (min-width: 720px){
+    body{
+        flex-wrap: nowrap;
+    }
+    .loader__texto{
+        width: auto;
+        margin-left: 50px;
+    }
+}
